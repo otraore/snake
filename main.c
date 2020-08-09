@@ -1,51 +1,23 @@
 #include "raylib.h"
+#include "snake.h"
+#include <math.h>
 
-enum Direction {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
-};
-
-Vector2 snakePosition = {0, 0};
+Vector2 snakePosition = {20, 20};
 int unitSize = 20;
 int screenWidth, screenHeight;
 float snakeSpeed = 0.2f;
-
-void moveSnake(enum Direction direction, int units, float speed) {
-    Vector2 initialPosition = snakePosition;
-    speed *= units;
-
-    switch (direction) {
-        case UP:
-            snakePosition.y -= speed;
-            break;
-        case DOWN:
-            snakePosition.y += speed;
-            break;
-        case LEFT:
-            snakePosition.x -= speed;
-            break;
-        case RIGHT:
-            snakePosition.x += speed;
-            break;
-    }
-
-    if(snakePosition.x > (screenWidth - units) || snakePosition.x < 0) {
-        snakePosition.x = initialPosition.x;
-    }
-
-    if(snakePosition.y < 0 || snakePosition.y > (screenHeight - units)) {
-        snakePosition.y = initialPosition.y;
-    }
-}
 
 int main()
 {
     screenWidth = 30 * unitSize;
     screenHeight = 30 * unitSize;
     Color snakeColor = WHITE;
-    Vector2 snakeUnitSizeV = {unitSize, unitSize};
+    Color foodColor = YELLOW;
+
+    Vector2 snakeUnitSizeV = {(float)unitSize, (float)unitSize};
+    Vector2 foodPosition = randomPosition(screenWidth, screenHeight, unitSize);
+
+
     enum Direction startDirection = RIGHT;
     enum Direction currentDirection = startDirection;
 
@@ -67,10 +39,48 @@ int main()
         BeginDrawing();
             ClearBackground(BLACK);
             DrawRectangleV(snakePosition, snakeUnitSizeV, snakeColor);
+            DrawRectangleV(foodPosition, snakeUnitSizeV, foodColor);
         EndDrawing();
     }
 
     CloseWindow();
 
     return 0;
+}
+
+void moveSnake(enum Direction direction, int units, float speed) {
+    Vector2 initialPosition = snakePosition;
+    speed *= units;
+
+    switch (direction) {
+        case UP:
+            snakePosition.y -= speed;
+            break;
+        case DOWN:
+            snakePosition.y += speed;
+            break;
+        case LEFT:
+            snakePosition.x -= speed;
+            break;
+        case RIGHT:
+            snakePosition.x += speed;
+            break;
+    }
+
+    if(snakePosition.x > (float)(screenWidth - units) || snakePosition.x < 0) {
+        snakePosition.x = initialPosition.x;
+    }
+
+    if(snakePosition.y < 0 || snakePosition.y > (float)(screenHeight - units)) {
+        snakePosition.y = initialPosition.y;
+    }
+}
+
+Vector2 randomPosition(int width, int height, int units) {
+     int cols = floor((double)(width / units));
+     int rows = floor((double)(height / units));
+
+     Vector2 pos = {floor(GetRandomValue(0, cols)), floor(GetRandomValue(0, rows))};
+
+     return pos;
 }
