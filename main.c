@@ -15,13 +15,12 @@ int main()
     Color foodColor = YELLOW;
 
     Vector2 snakeUnitSizeV = {(float)unitSize, (float)unitSize};
-    Vector2 foodPosition = randomPosition(screenWidth, screenHeight, unitSize);
-
 
     enum Direction startDirection = RIGHT;
     enum Direction currentDirection = startDirection;
 
     InitWindow(screenWidth, screenHeight, "snake");
+    Vector2 foodPosition = randomPosition(screenWidth, screenHeight, unitSize);
 
     SetTargetFPS(60);
 
@@ -80,7 +79,6 @@ Vector2 randomPosition(int width, int height, int units) {
      int cols = floor((double)(width / units));
      int rows = floor((double)(height / units));
 
-     Vector2 pos = {floor(GetRandomValue(0, cols)), floor(GetRandomValue(0, rows))};
-
-     return pos;
+     Vector2 pos = { floor(GetRandomValue(0, cols - 1)) * units, floor(GetRandomValue(0, rows - 1)) * units};
+    return pos;
 }

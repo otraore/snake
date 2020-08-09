@@ -5,6 +5,7 @@
 #ifndef SNAKE_SNAKE_H
 #define SNAKE_SNAKE_H
 enum Direction {
+    STOP = 0,
     UP,
     DOWN,
     LEFT,
