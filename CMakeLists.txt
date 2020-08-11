@@ -30,6 +30,6 @@ endif()
 
 # This is the main part:
 
-add_executable(${PROJECT_NAME} snake.h main.c)
+add_executable(${PROJECT_NAME} snake.h snake.c main.c)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)

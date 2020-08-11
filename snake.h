@@ -1,6 +1,6 @@
-//
-// Created by Ousmane on 09/08/2020.
-//
+#include "raylib.h"
+#include "raymath.h"
+#include <math.h>
 
 #ifndef SNAKE_SNAKE_H
 #define SNAKE_SNAKE_H
@@ -33,7 +33,6 @@ struct Snake {
 };
 
 
-struct Snake snake;
 void moveSnake(struct Snake *snake);
 void followSegment(struct Snake *snake, int startIndex, int endIndex);
 void moveBy(struct Snake *snake);
