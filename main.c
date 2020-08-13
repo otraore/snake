@@ -25,11 +25,6 @@ int main()
     growSnake(&snake);
     growSnake(&snake);
 
-    for (int i = 0; i < snake.nSegments; i++)
-    {
-        printf("x: %f, y: %f \n", snake.segments[i].x, snake.segments[i].y);
-    }
-
     InitWindow(screenWidth, screenHeight, "snake");
     snake.foodPosition = randomPosition(gridWidth, gridHeight);
 
