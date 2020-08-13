@@ -16,7 +16,7 @@ int main()
         .units = unitSize,
         .maxSegments = gridSize,
         .gameOver = false,
-        foodPositionEaten = (Vector2){-1, -1},
+        .foodPositionEaten = (Vector2){-1, -1},
         .deltaLocation = (Vector2){0, 0},
         .segments[0] = (Vector2){10, 10},
     };

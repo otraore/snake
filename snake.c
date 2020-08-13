@@ -67,16 +67,16 @@ void foodCheck(struct Snake *snake)
     // if food is eaten, find a new random position that's not in the snake
     if (Vector2Equals(snake->segments[0], snake->foodPosition))
     {
-        growSnake(&snake);
+        growSnake(snake);
         snake->foodPosition = snake->foodPositionEaten;
 
         while (Vector2Equals(snake->foodPosition, snake->foodPositionEaten))
         {
             snake->foodPosition = randomPosition(gridWidth, gridHeight);
-            if (insideSnake(&snake, snake->foodPosition))
+            if (insideSnake(snake, snake->foodPosition))
             {
                 snake->foodPosition = snake->foodPositionEaten;
-                growSnake(&snake);
+                growSnake(snake);
             }
         }
     }
