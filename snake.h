@@ -43,7 +43,7 @@ void move(struct Snake *snake);
 void growSnake(struct Snake *snake);
 void foodCheck(struct Snake *snake);
 bool insideGrid(Vector2);
-bool insideSnake(struct Snake *snake);
+bool insideSnake(struct Snake *snake, Vector2 position);
 Vector2 randomPosition(int cols, int rows);
 bool Vector2Equals(Vector2 a, Vector2 b);
 

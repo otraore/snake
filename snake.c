@@ -54,7 +54,7 @@ void move(struct Snake *snake)
     head->y += snake->deltaLocation.y;
 
     // check to see if outside grid or head is inside of the body
-    if (!insideGrid(*head) || insideSnake(snake))
+    if (!insideGrid(*head) || insideSnake(snake, snake->segments[0]))
     {
         snake->gameOver = true;
     }
@@ -73,7 +73,7 @@ void foodCheck(struct Snake *snake)
         while (Vector2Equals(snake->foodPosition, snake->foodPositionEaten))
         {
             snake->foodPosition = randomPosition(gridWidth, gridHeight);
-            if (Vector2Equals(snake->segments[0], snake->foodPosition))
+            if (insideSnake(&snake, snake->foodPosition))
             {
                 snake->foodPosition = snake->foodPositionEaten;
                 growSnake(&snake);
@@ -106,12 +106,12 @@ void growSnake(struct Snake *snake)
     }
 }
 
-// checks to see if snake head is inside of the snake body
-bool insideSnake(struct Snake *snake)
+// checks to see if position is inside of the snake body
+bool insideSnake(struct Snake *snake, Vector2 position)
 {
     for (int i = 1; i < snake->nSegments; i++)
     {
-        if (Vector2Equals(snake->segments[0], snake->segments[i]))
+        if (Vector2Equals(position, snake->segments[i]))
         {
             return true;
         }
