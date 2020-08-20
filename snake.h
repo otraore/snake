@@ -24,7 +24,9 @@ enum Direction
 struct Snake
 {
     enum Direction direction;
+    enum Direction nextDirection;
     Color color;
+    int startingLength;
     int movePeriod;
     int moveCounter;
     int units;

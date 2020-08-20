@@ -8,9 +8,11 @@ int main()
     Vector2 unitSizeV = {(float)unitSize, (float)unitSize};
 
     struct Snake snake = {
+        .nextDirection = RIGHT,
         .direction = RIGHT,
         .color = WHITE,
-        .movePeriod = 7,
+        .startingLength = 3,
+        .movePeriod = 6,
         .moveCounter = 0,
         .nSegments = 1,
         .units = unitSize,
@@ -20,10 +22,10 @@ int main()
         .deltaLocation = (Vector2){0, 0},
         .segments[0] = (Vector2){10, 10},
     };
-
-    growSnake(&snake);
-    growSnake(&snake);
-    growSnake(&snake);
+    for (int i = 0; i < snake.startingLength; i++)
+    {
+        growSnake(&snake);
+    }
 
     InitWindow(screenWidth, screenHeight, "snake");
     snake.foodPosition = randomPosition(gridWidth, gridHeight);
@@ -32,19 +34,20 @@ int main()
 
     while (!WindowShouldClose())
     {
+
         if (snake.direction == LEFT || snake.direction == RIGHT)
         {
             if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W))
-                snake.direction = UP;
+                snake.nextDirection = UP;
             if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S))
-                snake.direction = DOWN;
+                snake.nextDirection = DOWN;
         }
         else
         {
             if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D))
-                snake.direction = RIGHT;
+                snake.nextDirection = RIGHT;
             if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A))
-                snake.direction = LEFT;
+                snake.nextDirection = LEFT;
         }
 
         moveSnake(&snake);

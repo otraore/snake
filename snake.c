@@ -2,25 +2,25 @@
 
 void moveSnake(struct Snake *snake)
 {
-    switch (snake->direction)
-    {
-    case UP:
-        snake->deltaLocation = (Vector2){0, -1};
-        break;
-    case DOWN:
-        snake->deltaLocation = (Vector2){0, 1};
-        break;
-    case LEFT:
-        snake->deltaLocation = (Vector2){-1, 0};
-        break;
-    case RIGHT:
-        snake->deltaLocation = (Vector2){1, 0};
-        break;
-    }
-
     ++snake->moveCounter;
     if (snake->moveCounter >= snake->movePeriod)
     {
+        snake->direction = snake->nextDirection;
+        switch (snake->direction)
+        {
+        case UP:
+            snake->deltaLocation = (Vector2){0, -1};
+            break;
+        case DOWN:
+            snake->deltaLocation = (Vector2){0, 1};
+            break;
+        case LEFT:
+            snake->deltaLocation = (Vector2){-1, 0};
+            break;
+        case RIGHT:
+            snake->deltaLocation = (Vector2){1, 0};
+            break;
+        }
         snake->moveCounter = 0;
         move(snake);
     }
